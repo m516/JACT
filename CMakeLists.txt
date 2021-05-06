@@ -73,7 +73,7 @@ endif()
 # glad
 message("${BoldYellow}Using local copy of GLAD${ColorReset}")
 add_subdirectory(thirdparty/glad)
-include_directories(thirdparty/glad)
+include_directories(thirdparty)
 
 # glfw
 message("${BoldYellow}Using local copy of GLFW${ColorReset}")
@@ -82,7 +82,6 @@ add_subdirectory(thirdparty/glfw)
 # Dear ImGui
 message("${BoldYellow}Using local copy of ImGui${ColorReset}")
 add_subdirectory(thirdparty/imgui)
-include_directories(thirdparty)
 
 # glm
 message("${BoldYellow}Using local copy of GLM${ColorReset}")
