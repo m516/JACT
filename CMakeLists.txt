@@ -90,13 +90,11 @@ add_subdirectory(thirdparty/glm)
 include_directories(thirdparty/glm)
 
 # units
-message("${BoldYellow}Using local copy of fmt${ColorReset}")
-add_subdirectory(thirdparty/fmt)
-message("${BoldYellow}Using local copy of gsl-lite${ColorReset}")
-add_subdirectory(thirdparty/gsl-lite)
-message("${BoldYellow}Using local copy of units${ColorReset}")
-add_subdirectory(thirdparty/units/src)
-#include_directories(thirdparty/units/src/core/include))
+message("${BoldYellow}Searching for an installed version of mp-units${ColorReset}")
+message("This dependency will likely be a standard C++ library, so this is just a temporary workaround until then")
+message("It also doesn't like to be loaded locally.")
+message("If you do find a way to load this project locally, please send an issue or PR my way!")
+find_package(mp-units CONFIG REQUIRED)
 
 message("${BoldYellow}Library search complete!${ColorReset}")
 

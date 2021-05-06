@@ -25,4 +25,4 @@ set(PROJECT_HEADERS
 add_executable (${EXECUTABLE_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # Add tests and install targets if needed.
-target_link_libraries (${EXECUTABLE_NAME} glad glm glfw imgui units) 
+target_link_libraries (${EXECUTABLE_NAME} glad glm glfw imgui mp-units::mp-units) 
