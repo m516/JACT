@@ -22,6 +22,7 @@ add_library(
         imgui_widgets.cpp
         imstb_truetype.h
         imconfig.h
+        imgui_tables.cpp
         imgui_demo.cpp
         imgui_impl_glfw.h
         imstb_rectpack.h
