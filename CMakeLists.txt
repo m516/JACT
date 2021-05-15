@@ -110,28 +110,31 @@ if(OpenMP_FOUND)
     endif()
 endif()
 
-#CUDA
-message("${BoldYellow}Checking if CUDA files can be compiled${ColorReset}")
-option(USE_CUDA "Attempt to use CUDA. If disaled, projects that require CUDA can't build. Enabled by default" ON)
-#https://cliutils.gitlab.io/modern-cmake/chapters/packages/CUDA.html
-if(USE_CUDA)
-    include(CheckLanguage)
-    check_language(CUDA)
-    if(CMAKE_CUDA_COMPILER)
-        message("${BoldYellow}CUDA exists${ColorReset}")
-        enable_language(CUDA)
-        include_directories(${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
-        if(NOT DEFINED CMAKE_CUDA_STANDARD)
-            set(CMAKE_CUDA_STANDARD 11)
-            set(CMAKE_CUDA_STANDARD_REQUIRED ON)
-        endif()
-    else()
-        message("${BoldRed}Failed to find CUDA. Some projects can't be run.${ColorReset}")
-    endif()
-else()
-    message("${BoldRed}CUDA was disabled.${ColorReset}")
-endif()
+
+# Uncomment when the project uses CUDA
+# #CUDA
+# message("${BoldYellow}Checking if CUDA files can be compiled${ColorReset}")
+# option(USE_CUDA "Attempt to use CUDA. If disaled, projects that require CUDA can't build. Enabled by default" ON)
+# #https://cliutils.gitlab.io/modern-cmake/chapters/packages/CUDA.html
+# if(USE_CUDA)
+#     include(CheckLanguage)
+#     check_language(CUDA)
+#     if(CMAKE_CUDA_COMPILER)
+#         message("${BoldYellow}CUDA exists${ColorReset}")
+#         enable_language(CUDA)
+#         include_directories(${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
+#         if(NOT DEFINED CMAKE_CUDA_STANDARD)
+#             set(CMAKE_CUDA_STANDARD 11)
+#             set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+#         endif()
+#     else()
+#         message("${BoldRed}Failed to find CUDA. Some projects can't be run.${ColorReset}")
+#     endif()
+# else()
+#     message("${BoldRed}CUDA was disabled.${ColorReset}")
+# endif()
     
 
 # Include sub-projects.
+include_directories("src")
 add_subdirectory ("src")
