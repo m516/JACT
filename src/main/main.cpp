@@ -10,6 +10,9 @@
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
 
+#include "ksolver/expression.hpp"
+#include "ksolver/solver.hpp"
+
 #include <thread>
 
 using namespace std;

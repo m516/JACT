@@ -2,20 +2,18 @@
 # find . | grep .cpp
 # Delete the ./ at the beginning of each file with block selection (alt + shift in Visual Studio)
 set(PROJECT_SOURCES
-./expression.cpp
-./expressions/operator.cpp
+expression.cpp
 )
 
 # In UNIX, set PROJECT_HEADERS using the following command
 # find . | grep .h
 # Delete the ./ at the beginning of each file with block selection (alt + shift in Visual Studio)
 set(PROJECT_HEADERS
-./expression.hpp
-./expressions/constant.hpp
-./expressions/operator.hpp
-./expressions/variable.hpp
-./property.hpp
-./solver.hpp
+expression.hpp
+operator.hpp
+property.hpp
+solver.hpp
+number.hpp
 )
 
 
