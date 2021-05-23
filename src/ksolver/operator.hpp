@@ -10,19 +10,19 @@ class Expression;
 
 
 /**
- * @brief A class that represents an operator
+ * @brief A struct that represents an operator
  * 
  */
-struct Operator{
+typedef struct operator_t{
 
-    size_t num_params;
+    size_t num_params = 0;
 
-    number_t (*evaluate)(Expression const &);
+    number_t  (*evaluate)(Expression const &) = nullptr;
 
-    Expression (*simplify)(Expression &);
+    Expression (*simplify)(Expression const &) = nullptr;
 
-    Operator* inverse;
+    const struct operator_t* inverse = nullptr;
 
-};
+} Operator;
 
 }

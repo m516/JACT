@@ -5,7 +5,6 @@
 #include "number.hpp"
 #include <memory>
 
-class Solver;
 
 namespace ksolver{
 
@@ -24,7 +23,7 @@ class Expression{
      */
     struct expression_operator{
         Expression* operand[2];
-        Operator operator_inst;
+        const Operator *operator_inst;
     };
 
     /**
@@ -78,19 +77,13 @@ class Expression{
     union properties_t properties;
 
     /**
-     * @brief The solver
-     * 
-     */
-    const Solver &solver;
-
-    /**
      * @brief Construct a new variable based on a property
      * 
      * @param solver 
      * @param property 
      */
-    Expression(const Solver &solver, Property* property) : solver(solver), type(expression_type::Variable) {
-        properties.expr_variable.property = property;
+    Expression(Property &property) : type(expression_type::Variable) {
+        properties.expr_variable.property = &property;
     }
 
     /**
@@ -99,7 +92,7 @@ class Expression{
      * @param solver 
      * @param value 
      */
-    Expression(const Solver &solver, number_t value) : solver(solver), type(expression_type::Constant) {
+    Expression(number_t value) : type(expression_type::Constant) {
         properties.expr_constant.value = value;
     }
 
@@ -111,13 +104,44 @@ class Expression{
      * @param operand1 
      * @param operand2 
      */
-    Expression(const Solver &solver, const Operator &op, Expression *operand1 = nullptr, Expression *operand2 = nullptr) :
-    solver(solver),
+    Expression(const Operator &op, const Expression *operand1 = nullptr, const Expression *operand2 = nullptr) :
     type(expression_type::Operator){
-        properties.expr_operator.operator_inst = op;
-        properties.expr_operator.operand[0]=operand1;
-        properties.expr_operator.operand[1]=operand2;
-    }    
+        properties.expr_operator.operator_inst = &op;
+        if (operand1 != nullptr)
+            properties.expr_operator.operand[0] = new Expression(*operand1);
+        if (operand2 != nullptr)
+            properties.expr_operator.operand[1] = new Expression(*operand2);
+    }  
+
+    /**
+     * @brief The copy constructor, makes a deep copy of this expression
+     * 
+     * @param expression 
+     */
+    Expression(const Expression &expression) : 
+    type(expression.type),
+    properties(expression.properties)
+    {
+        if(type==expression_type::Operator){
+            if(expression.properties.expr_operator.operand[0] != nullptr)
+                properties.expr_operator.operand[0] = new Expression(*expression.properties.expr_operator.operand[0]);
+            if(expression.properties.expr_operator.operand[1] != nullptr)
+                properties.expr_operator.operand[1] = new Expression(*expression.properties.expr_operator.operand[1]);
+        }
+    }
+
+    /**
+     * @brief Destroy the Expression object
+     * 
+     */
+    ~Expression(){
+        if(type==expression_type::Operator){
+            if(properties.expr_operator.operand[0] != nullptr)
+                delete properties.expr_operator.operand[0];
+            if(properties.expr_operator.operand[1] != nullptr)
+                delete properties.expr_operator.operand[1];
+        }
+    }
 
     /**
      * @brief Evaluates the expression and returns the value
@@ -130,10 +154,13 @@ class Expression{
             return properties.expr_constant.value;
 
             case expression_type::Operator:
-            return properties.expr_operator.operator_inst.evaluate(*this);
+            return properties.expr_operator.operator_inst->evaluate(*this);
 
             case expression_type::Variable:
             return properties.expr_variable.property->value;
+
+            default:
+            return NAN;
         }
     }
 
@@ -157,6 +184,9 @@ class Expression{
             case expression_type::Variable:
             return properties.expr_variable.property->fixed;
         }
+        
+        //There should be no other expression types. Return false.
+        return false;
     }
 };
 

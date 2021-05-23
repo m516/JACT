@@ -7,6 +7,7 @@
 
 #include "expression.hpp"
 #include "property.hpp"
+#include "operators.hpp"
 
 
 #define DEBUG
@@ -15,7 +16,7 @@ namespace ksolver{
 
 class Solver{
     public:
-    std::vector<Expression*> expressions;
+    std::vector<Expression> equations;
     std::vector<Property> properties;
 };
 

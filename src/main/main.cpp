@@ -106,8 +106,46 @@ void setGuiScale(float guiScale) {
 	ImGui::GetIO().FontGlobalScale = guiScale / pixelRatio;
 }
 
+
+
+void tryKSolver(){
+    using namespace ksolver;
+
+    ksolver::Solver solver;
+
+    Property x;
+    x.fixed = false;
+    x.name = "x";
+    x.value=1;
+
+    Expression x_expr(x);
+
+    Expression two(2);
+
+    Expression x_plus_two(Operators::addition, &x_expr, &two);
+
+    number_t result = x_plus_two.evaluate(); //Should be three
+    number_t fixed = x_plus_two.fixed(); //Should be false
+
+    cout << __FILE__ ":"  << __LINE__ << "\t The result of x=1; x+2 = " << result << endl;
+    cout << __FILE__ ":"  << __LINE__ << "\t x+2 is fixed? " << fixed << endl;
+
+    x.fixed = true;
+    cout << "X is a fixed variable now." << endl;
+    fixed = x_plus_two.fixed(); //Should be true
+    cout << __FILE__ ":"  << __LINE__ << "\t x+2 is fixed? " << fixed << endl;
+
+
+}
+
+
+
 int main()
 {
+
+    tryKSolver();
+
+
 	//Attempt to initialize GLFW
 	if (!glfwInit())
 	{
