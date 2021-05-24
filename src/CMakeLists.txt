@@ -26,4 +26,4 @@ add_subdirectory(ksolver)
 add_executable (${EXECUTABLE_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # Add tests and install targets if needed.
-target_link_libraries (${EXECUTABLE_NAME} ksolver glad glm glfw imgui mp-units::mp-units) 
+target_link_libraries (${EXECUTABLE_NAME} ksolver glad glm glfw imgui) 

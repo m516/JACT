@@ -88,12 +88,12 @@ message("${BoldYellow}Using local copy of GLM${ColorReset}")
 add_subdirectory(thirdparty/glm)
 include_directories(thirdparty/glm)
 
-# units
-message("${BoldYellow}Searching for an installed version of mp-units${ColorReset}")
-message("This dependency will likely be a standard C++ library, so this is just a temporary workaround until then")
-message("It also doesn't like to be loaded locally.")
-message("If you do find a way to load this project locally, please send an issue or PR my way!")
-find_package(mp-units CONFIG REQUIRED)
+# units -- disabled until needed
+# message("${BoldYellow}Searching for an installed version of mp-units${ColorReset}")
+# message("This dependency will likely be a standard C++ library, so this is just a temporary workaround until then")
+# message("It also doesn't like to be loaded locally.")
+# message("If you do find a way to load this project locally, please send an issue or PR my way!")
+# find_package(mp-units CONFIG REQUIRED)
 
 message("${BoldYellow}Library search complete!${ColorReset}")
 
