@@ -88,6 +88,20 @@ message("${BoldYellow}Using local copy of GLM${ColorReset}")
 add_subdirectory(thirdparty/glm)
 include_directories(thirdparty/glm)
 
+# Google Test
+# message("${BoldYellow}Fetching the latest Google Test framework${ColorReset}")
+# include(FetchContent)
+# FetchContent_Declare(
+#   googletest
+#   GIT_REPOSITORY https://github.com/google/googletest.git
+# )
+# # For Windows: Prevent overriding the parent project's compiler/linker settings
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googletest)
+message("${BoldYellow}Using local copy of the Google Test framework${ColorReset}")
+add_subdirectory(thirdparty/googletest)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 # units -- disabled until needed
 # message("${BoldYellow}Searching for an installed version of mp-units${ColorReset}")
 # message("This dependency will likely be a standard C++ library, so this is just a temporary workaround until then")
@@ -138,3 +152,8 @@ endif()
 # Include sub-projects.
 include_directories("src")
 add_subdirectory ("src")
+
+
+# Include tests.
+include(CTest)
+add_subdirectory ("test")
