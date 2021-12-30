@@ -1,6 +1,6 @@
 #pragma once
 
-#include "operator.hpp"
+#include "../operator.hpp"
 
 namespace ksolver{
 namespace Operators{

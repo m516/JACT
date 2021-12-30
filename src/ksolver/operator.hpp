@@ -1,6 +1,7 @@
 #pragma once
 
 #include "number.hpp"
+#include <cstddef>
 
 
 namespace ksolver{

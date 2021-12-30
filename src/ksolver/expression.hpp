@@ -4,6 +4,7 @@
 #include "operator.hpp"
 #include "number.hpp"
 #include <memory>
+#include <cmath>
 
 
 namespace ksolver{
